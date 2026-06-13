@@ -1,3 +1,17 @@
+/**
+ * EchoDNA Personality Analysis Engine
+ * 
+ * This module contains the core deterministic scoring algorithms to calculate 
+ * the user's musical genome (Genre DNA), emotional profile (Mood Spectrum), 
+ * listening archetypes, and music alter ego.
+ * 
+ * Algorithm Steps:
+ * 1. Extract, normalize, and frequency-sort listening genres.
+ * 2. Calculate mean values for core audio features (valence, energy, tempo, etc.).
+ * 3. Map values to 8 defined archetypes using Euclidean matching distances.
+ * 4. Generate visual representation parameters (aura gradients, Recharts data shapes).
+ */
+
 import type {
   SpotifyData,
   SpotifyArtist,
