@@ -1,242 +1,229 @@
 # EchoDNA — Your Music. Your DNA.
 
-> **A Spotify Wrapped–style music personality analyzer** that connects to your Spotify, analyzes your listening patterns, and generates your unique listening archetype, genre DNA, mood spectrum, music alter ego, and shareable story cards.
+EchoDNA is a music personality analyzer that connects to your Spotify, analyzes your listening patterns, and generates your unique listening archetype, genre DNA, mood spectrum, music alter ego, and shareable story cards.
 
 ![EchoDNA](https://img.shields.io/badge/Next.js-16-black) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue) ![Tailwind](https://img.shields.io/badge/Tailwind-v4-38bdf8) ![Framer Motion](https://img.shields.io/badge/Framer%20Motion-11-purple)
 
 ---
 
-## ✨ What I Built
+## Architectural Features
 
-**EchoDNA** is a cinematic, mobile-first music personality analyzer that feels like Spotify Wrapped meets a premium personality test.
+EchoDNA is a cinematic, mobile-first music personality analyzer that provides a premium, interactive personality breakdown based on actual Spotify listening history.
 
 ### Core Features
-- 🎵 **Spotify OAuth** — secure login with token refresh, error recovery
-- 🧠 **Personality Engine** — deterministic analysis from your actual listening data
-- 🧬 **Genre DNA** — animated pie chart of your musical genome
-- 🎭 **Mood Spectrum** — radar chart of your emotional audio features
-- 🌙 **8 Listening Archetypes** — Midnight Dreamer, Neon Rebel, Indie Philosopher, Emotional Astronaut, Chaos Curator, Vintage Romantic, Sonic Explorer, Melancholy Poet
-- 🎲 **Music Alter Ego** — fictional persona with name, quote, aesthetic
-- ✨ **Aura Reading** — emotional aura based on mood profile
-- 💞 **Compatibility** — how you vibe with other archetypes
-- 📸 **Story Cards** — PNG export for Instagram/Twitter sharing
-- 📊 **Listening Stats** — artist count, genre diversity, popularity score
+- **Spotify OAuth Integration**: Secure authentication flow utilizing cookie-stored credentials, automated token refresh, and edge-case error recovery.
+- **Personality Engine**: A deterministic analysis algorithm running on top-tracks and artists metadata.
+- **Genre DNA Visualizer**: Radial-styled breakdown graphing your musical genres.
+- **Mood Spectrum Mapping**: Interactive radar chart plotting valence, energy, acousticness, and danceability.
+- **Listening Archetypes**: Maps users to one of 8 distinct listening types (e.g., Midnight Dreamer, Neon Rebel, Indie Philosopher, Emotional Astronaut, Vintage Romantic, Sonic Explorer, Melancholy Poet).
+- **Music Alter Ego**: Generates a fictional musician persona matching your core aesthetic.
+- **Aura Identification**: Creates a responsive gradient representing the emotional tone of your library.
+- **Compatibility Index**: Visual comparison displaying how well your profile aligns with other archetypes.
+- **Story Card Exporter**: High-resolution 9:16 vertical PNG layouts optimized for social sharing.
+- **Detailed Metrics**: Numerical counters displaying artist counts, genre diversity, and popularity indices.
 
-### Design Highlights
-- Premium dark theme with neon accents and glassmorphism
-- Cinematic animations with Framer Motion
-- Floating particles, animated waveforms, gradient text
-- Mobile-first responsive design
-- Demo mode (works without Spotify login)
-- Reduced-motion support for accessibility
+### Visual & Interactive Highlights
+- Premium dark-theme layout with dynamic light-mode transition variables.
+- Fluid soundwave canvas animation reacting to user mouse movements.
+- Staggered word-by-word entrance animations and magnetic button wrappers.
+- Three-dimensional card hover tilt transformations.
+- Complete responsive design optimized for mobile viewports.
+- Integrated Demo Mode allowing instant feature validation without Spotify login.
+- Keyboard navigation and reduced-motion styling for accessibility.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Technology | Purpose |
 |-----------|---------|
-| Next.js 16 + React 19 | Framework & rendering |
-| TypeScript | Type safety |
-| Tailwind CSS v4 | Design system |
-| Framer Motion | Animations |
-| Recharts | Genre DNA & Mood charts |
-| html-to-image | PNG story card export |
-| Zustand | Global state management |
-| shadcn/ui | Base UI components |
+| Next.js 16 + React 19 | Application framework and server rendering |
+| TypeScript | Type safety and schema enforcement |
+| Tailwind CSS v4 | Utility classes and theme design tokens |
+| Framer Motion | Smooth springs and transition physics |
+| Recharts | Interactive radar and circular graphics |
+| html-to-image | Client-side PNG rendering and export |
+| Zustand | Unified client application state management |
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
-- Node.js 18+
-- npm or pnpm
+- Node.js 18 or higher
+- npm or pnpm package managers
 
-### 1. Clone & Install
+### 1. Installation
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/echodna.git
-cd echodna
+git clone https://github.com/AryaAjayan/EchoDNA.git
+cd EchoDNA
 npm install
 ```
 
-### 2. Set Up Spotify App
+### 2. Configure Spotify Application
 
-1. Go to [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)
-2. Click **Create App**
-3. Set **Redirect URI** to: `http://localhost:3000/api/auth/callback`
-4. Note your **Client ID** and **Client Secret**
+1. Open the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)
+2. Select **Create App**
+3. Configure the **Redirect URI** to: `http://localhost:3000/api/auth/callback`
+4. Copy your **Client ID** and **Client Secret** credentials
 
-### 3. Configure Environment Variables
+### 3. Environment Variables Setup
+
+Create a local environment file:
 
 ```bash
 cp .env.example .env.local
 ```
 
-Edit `.env.local`:
-```
+Edit the values in `.env.local`:
+
+```env
 SPOTIFY_CLIENT_ID=your_client_id_here
 SPOTIFY_CLIENT_SECRET=your_client_secret_here
 SPOTIFY_REDIRECT_URI=http://localhost:3000/api/auth/callback
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
-### 4. Run Development Server
+### 4. Running the App
+
+Start the development server:
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
+Open [http://localhost:3000](http://localhost:3000) inside your browser.
 
-### 5. Demo Mode
-
-The app works without Spotify credentials — visit `/dashboard` directly to see the demo personality profile.
+### 5. Offline Demo Validation
+You can bypass the Spotify authentication requirement by navigating directly to `/dashboard` to view the demo data layout.
 
 ---
 
-## 📁 Architecture
+## Directory Structure
 
 ```
 /app
-  page.tsx                    ← Landing page (hero, features, testimonials)
-  layout.tsx                  ← Root layout, dark theme, SEO
-  /loading/page.tsx           ← Animated sync experience
-  /dashboard/page.tsx         ← Full results dashboard
-  /auth-error/page.tsx        ← Error handling for auth edge cases
+  page.tsx                    ← Redesigned landing page (canvas background, bento grid)
+  layout.tsx                  ← Root layout config, theme provider, fonts, SEO
+  /loading/page.tsx           ← Animated visual syncing status
+  /dashboard/page.tsx         ← Results analysis dashboard
+  /auth-error/page.tsx        ← Error display for invalid states or credentials
   /api/
-    /auth/spotify/route.ts    ← OAuth initiation
-    /auth/callback/route.ts   ← OAuth callback + token storage
-    /spotify/analyze/route.ts ← Data fetch + personality analysis
+    /auth/spotify/route.ts    ← Initiates Spotify authorization redirect
+    /auth/callback/route.ts   ← Exchanges authorization code for tokens
+    /spotify/analyze/route.ts ← Resolves listening history and computes profile
 
 /components/dashboard/
-  HeroCard.tsx                ← Archetype reveal
-  GenreDNA.tsx                ← Pie chart (Recharts)
-  MoodSpectrum.tsx            ← Radar chart
-  AlterEgoCard.tsx            ← Fictional persona
-  TopArtistsGrid.tsx          ← Artist cards with images
-  AuraSummary.tsx             ← Emotional aura
-  ListeningStats.tsx          ← Stat counters
-  ExportSection.tsx           ← Story card + PNG export
-  CompatibilitySection.tsx    ← Archetype compatibility
+  HeroCard.tsx                ← Displays listening archetype with auric backgrounds
+  GenreDNA.tsx                ← Custom radial genre graph
+  MoodSpectrum.tsx            ← Mood radar chart
+  AlterEgoCard.tsx            ← Visual musician persona block
+  TopArtistsGrid.tsx          ← Grid items containing artist graphics
+  AuraSummary.tsx             ← Auric visual details
+  ListeningStats.tsx          ← Value counters
+  ExportSection.tsx           ← Story layout preview and PNG exporter
+  CompatibilitySection.tsx    ← Match index visualizer
 
 /lib/
-  spotify.ts                  ← Spotify API client (retry, timeout, refresh)
-  personality-engine.ts       ← Core analysis algorithm
-  archetypes.ts               ← 8 archetype definitions
-  store.ts                    ← Zustand global store
+  spotify.ts                  ← Spotify client with rate-limiting and token refresh
+  personality-engine.ts       ← Core profile matching calculations
+  archetypes.ts               ← 8 metadata definitions
+  store.ts                    ← Global state store
 
 /types/
-  spotify.ts                  ← Spotify API types
-  personality.ts              ← Personality result types
-
-/ai-logs/                     ← AI conversation logs (required for contest)
+  spotify.ts                  ← Spotify API data shapes
+  personality.ts              ← Personality types
 ```
 
 ---
 
-## 🔐 Spotify Integration
+## Authorization & API Specifications
 
-### OAuth Flow
-1. User clicks "Analyze My Spotify"
-2. Server generates CSRF state → stores in httpOnly cookie
-3. Redirect to Spotify authorize URL
-4. Spotify redirects back with auth code
-5. Server exchanges code for tokens → httpOnly cookies
-6. Redirect to loading page → fetch + analyze → dashboard
+### OAuth Protocol
+1. User requests analysis via the connection CTA.
+2. The server generates an anti-CSRF state token and stores it in an httpOnly cookie.
+3. User is redirected to Spotify's authorization server.
+4. On user approval, Spotify forwards an authorization code to our callback API.
+5. The callback service exchanges the code for access/refresh tokens and stores them in httpOnly cookies.
+6. The client is redirected to the dashboard processing page.
 
-### Data Fetched
-- Top artists (medium term, 20)
-- Top tracks (medium term, 20)
-- Audio features (all top tracks)
-- Recently played (20)
-- User profile
+### Data Collection Scope
+- User Profile: `user-read-private`, `user-read-email`
+- Top Artists: `user-top-read` (medium-term span)
+- Top Tracks: `user-top-read` (medium-term span)
+- Audio Features: Resolved for all top tracks
+- Recently Played: `user-read-recently-played`
 
-### Edge Cases Handled
-- Cancelled login → friendly error page with retry
-- Expired tokens → auto-refresh via refresh token
-- Rate limits → graceful null return, partial data flag
-- Network timeout → 8-second AbortController
-- Empty listening history → default personality profile
-- Missing audio features → null-coalesced to 0.5
-
----
-
-## 🧠 Personality Engine
-
-The personality engine uses a **weighted scoring algorithm**:
-
-1. **Extract genres** from top artists (deduplicated, frequency-sorted)
-2. **Build mood profile** by averaging audio features across tracks
-3. **Score 8 archetypes** based on mood weights + genre keyword matching
-4. **Select highest scorer** as primary archetype
-5. **Map archetype → alter ego** with name, quote, aesthetic
-6. **Determine aura** from mood profile conditional matching
-7. **Build genre DNA** with weighted distribution + color coding
-
-No external AI API required — 100% deterministic, <10ms execution time.
+### Error Tolerances
+- **Auth Rejection**: Redirects back to home page displaying explaining toast.
+- **Token Expiry**: Handled on-the-fly via silent refresh requests.
+- **Rate-Limiting (429)**: Backs off and falls back to partial metadata rendering safely.
+- **Network Interruptions**: Requests are bound by an 8-second client-side timeout wrapper.
+- **Empty History**: Fails over to "Sonic Embryo" status instead of returning structural crashes.
 
 ---
 
-## 🎨 Design System
+## Personality Calculation Engine
 
-- **Background**: #080810 (near-black with blue undertone)
-- **Primary**: #1db954 (Spotify green)
-- **Typography**: Inter + Space Grotesk
-- **Effects**: Glassmorphism, neon glow, gradient text
-- **Animations**: Framer Motion + CSS keyframes
-- **Accessibility**: Reduced motion, ARIA labels, semantic HTML
+The profile scoring operates deterministically:
 
----
+1. **Genre Extraction**: Extracts genres from top artists, sorts by frequency weightings, and filters out duplicates.
+2. **Mood Profile**: Calculates mean values for audio features (energy, valence, tempo, acousticness, danceability).
+3. **Archetype Mapping**: Evaluates the mean features against the reference criteria defined for each of the 8 archetypes.
+4. **Alter Ego Selection**: Retrieves the alter ego archetype containing name metadata, quotes, and visual references.
+5. **Aura Resolution**: Evaluates valence and acoustics to assign color coordinates.
 
-## 📱 Deployment
-
-### Vercel (Recommended)
-
-1. Push to GitHub
-2. Import project on [vercel.com](https://vercel.com)
-3. Add environment variables in Vercel dashboard
-4. Update `SPOTIFY_REDIRECT_URI` to `https://your-domain.vercel.app/api/auth/callback`
-5. Add the production redirect URI in Spotify Developer Dashboard
-6. Deploy
+The system relies entirely on deterministic mapping, executing in under 10ms with zero external API calls.
 
 ---
 
-## 📋 AI Logs
+## Design System Specifications
 
-See `/ai-logs/` for detailed AI conversation logs covering:
-- `01-architecture.md` — Architecture & design decisions
-- `02-personality-engine.md` — Personality algorithm design
-- `03-ui-design.md` — UI design system & visual strategy
-- `04-spotify-integration.md` — OAuth & edge case handling
-- `05-performance.md` — Performance optimization strategies
-
----
-
-## 🎥 Loom Walkthrough
-
-[Link to Loom walkthrough video] — 5 minute demo covering:
-1. Landing page visual design
-2. Spotify login flow
-3. Loading animation experience
-4. Dashboard personality reveal
-5. Genre DNA & Mood Spectrum charts
-6. Alter ego & aura reading
-7. Story card export flow
-8. Mobile responsiveness
+- **Theme Variable System**: Transitions CSS variables from Dark mode (base `#080810`) to Light mode (base `#f7f8fc`) seamlessly.
+- **Frosted Glass (Glassmorphism)**: Controlled by variables `--glass-bg`, `--glass-border`, and `--glass-blur` to adapt visibility.
+- **Fine-Grain Overlay**: Set at `0.028` opacity in dark mode and `0.015` opacity in light mode.
+- **Transitional Easing**: Bound to `.6s` cubic-bezier transitions for background, border, color, and shadow properties.
+- **Accessibility Compliance**: Implements aria role tags, checks system settings for reduced-motion limits, and maintains color contrasts.
 
 ---
 
-## ✅ What I'd Improve With More Time
+## Deployment Instructions
 
-See [REFLECTION.md](./REFLECTION.md) for detailed reflection.
+### Vercel Deployment
 
-Quick summary:
-- Add Gemini AI for dynamic personality summaries
-- Friend compatibility with shared links
-- Playlist recommendation engine
-- Story mode (swipeable personality reveal)
-- Server-side OG image generation for social sharing
-- E2E tests with Playwright
-- Internationalization (i18n)
+1. Commit changes to your Git repository and push.
+2. Link the repository inside your [Vercel Dashboard](https://vercel.com).
+3. Configure the environment variables:
+   - `SPOTIFY_CLIENT_ID`
+   - `SPOTIFY_CLIENT_SECRET`
+   - `SPOTIFY_REDIRECT_URI` (pointing to your Vercel callback endpoint)
+   - `NEXT_PUBLIC_APP_URL` (pointing to your Vercel deployment URL)
+4. Update redirect URIs in the Spotify Developer Dashboard to match.
+5. Deploy.
+
+---
+
+## Video Walkthrough
+
+A video demonstration covers:
+1. Animated landing page interface
+2. Complete Spotify authentication flow
+3. Cinematic progress loader
+4. Dashboard and archetype visualizations
+5. Bento grid interactive components
+6. Instagram Story PNG export utility
+7. Mobile responsive layout testing
+
+---
+
+## Future Scope
+
+Planned upgrades:
+- Dynamic, AI-curated personality summaries using Gemini API.
+- Shared URLs to test listening compatibility with friends.
+- Personalized playlist curation based on computed archetypes.
+- Swipable visual story card presentation modes.
+- Edge-rendered Open Graph (OG) dynamic card images.
+- Integration tests using Playwright.
+- Internationalization (i18n) settings.
